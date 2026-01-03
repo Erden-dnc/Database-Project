@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTS - Lisansüstü Tez Sistemi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">GTS - Graduate Thesis System</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="tez-ekle.html">Add Thesis</a></li>
+                <li><a href="tez-ara.html">Search Theses</a></li>
+                <li><a href="yönetim.html">Management</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="tez-sayisi">-</h3>
+                        <p>Total Theses</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="yazar-sayisi">-</h3>
+                        <p>Authors</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="universite-sayisi">-</h3>
+                        <p>Universities</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"></div>
+                    <div class="stat-info">
+                        <h3 id="danisman-sayisi">-</h3>
+                        <p>Advisors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3>Recently Added Theses</h3>
+                <a href="tez-ara.html" class="btn-secondary">View All</a>
+            </div>
+            <div id="tezler-listesi" class="tezler-grid">
+                <div class="loading">Yükleniyor...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

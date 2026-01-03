@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tez Ara - GTS</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">GTS - Graduate Thesis System</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tez-ekle.html">Add Thesis</a></li>
+                <li><a href="tez-ara.html" class="active">Search Theses</a></li>
+                <li><a href="yönetim.html">Management</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="search-form">
+            <h2>Thesis Search</h2>
+            <form id="search-form" onsubmit="searchTezler(event)">
+                <div class="search-form-grid">
+                    <div class="form-group">
+                        <label for="search-baslik">Title</label>
+                        <input type="text" id="search-baslik" class="form-control" placeholder="Search in thesis title...">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-yazar">Author</label>
+                        <input type="text" id="search-yazar" class="form-control" placeholder="Author first or last name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-yil">Year</label>
+                        <input type="number" id="search-yil" class="form-control" placeholder="Year" min="1900" max="2100">
+                    </div>
+                    <div class="form-group">
+                        <label for="search-tur">Type</label>
+                        <select id="search-tur" class="form-control">
+                            <option value="">All</option>
+                            <option value="Master">Master</option>
+                            <option value="PhD">PhD</option>
+                            <option value="Medical Specialization">Medical Specialization</option>
+                            <option value="Art Proficiency">Art Proficiency</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-universite">University</label>
+                        <select id="search-universite" class="form-control">
+                            <option value="">All</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="search-dil">Language</label>
+                        <input type="text" id="search-dil" class="form-control" placeholder="Turkish, English...">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearSearch()">Clear</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="content-section">
+            <div class="section-header">
+                <h3 id="results-title">All Theses</h3>
+                <span id="results-count"></span>
+            </div>
+            <div id="tezler-listesi" class="tezler-grid">
+                <div class="loading">Arama yapmak için formu doldurun veya "Ara" butonuna tıklayın.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/tez-ara.js"></script>
+</body>
+</html>
+
