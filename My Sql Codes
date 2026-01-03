@@ -1,0 +1,363 @@
+My Sql Codes 
+use gts_thesis_system;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+
+
+--
+-- Veritabanı: `gts_thesis_system`
+
+CREATE TABLE `Advisor` (
+  `advisor_id` int(7) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `title` varchar(500) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Advisor` (`advisor_id`, `first_name`, `last_name`, `title`, `email`, `phone`) VALUES
+(1, 'Ibrahim', 'Aydin', 'Prof. Dr.', 'ibrahim.aydin@marmara.edu.tr', '0216-123-4567'),
+(2, 'Elif', 'Yildiz', 'Assoc. Prof. Dr.', 'elif.yildiz@marmara.edu.tr', '0216-234-5678'),
+(3, 'Hasan', 'Kurt', 'Prof. Dr.', 'hasan.kurt@istanbul.edu.tr', '0212-345-6789'),
+(4, 'Selin', 'Ozkan', 'Dr.', 'selin.ozkan@boun.edu.tr', '0212-456-7890'),
+(5, 'Murat', 'Tuncer', 'Prof. Dr.', 'murat.tuncer@marmara.edu.tr', '0216-567-8901'),
+(6, 'Gul', 'Aksoy', 'Assoc. Prof. Dr.', 'gul.aksoy@marmara.edu.tr', '0216-678-9012'),
+(7, 'Can', 'Yucel', 'Prof. Dr.', 'can.yucel@istanbul.edu.tr', '0212-789-0123');
+
+
+CREATE TABLE `Author` (
+  `author_id` int(7) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Author` (`author_id`, `first_name`, `last_name`, `email`, `phone`) VALUES
+(1, 'Ahmet', 'Yilmaz', 'ahmet.yilmaz@email.com', '0532-123-4567'),
+(2, 'Ayse', 'Demir', 'ayse.demir@email.com', '0533-234-5678'),
+(3, 'Mehmet', 'Kaya', 'mehmet.kaya@email.com', '0534-345-6789'),
+(4, 'Fatma', 'Sahin', 'fatma.sahin@email.com', '0535-456-7890'),
+(5, 'Ali', 'Celik', 'ali.celik@email.com', '0536-567-8901'),
+(6, 'Zeynep', 'Arslan', 'zeynep.arslan@email.com', '0537-678-9012'),
+(7, 'Mustafa', 'Ozdemir', 'mustafa.ozdemir@email.com', '0538-789-0123');
+
+
+
+CREATE TABLE `Institute` (
+  `institute_id` int(7) NOT NULL,
+  `institute_name` varchar(200) NOT NULL,
+  `university_id` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Institute` (`institute_id`, `institute_name`, `university_id`) VALUES
+(6, 'Graduate School of Engineering and Natural Sciences', 3),
+(3, 'Graduate School of Health Sciences', 1),
+(1, 'Graduate School of Natural and Applied Sciences', 1),
+(4, 'Graduate School of Natural and Applied Sciences', 2),
+(2, 'Graduate School of Social Sciences', 1),
+(5, 'Graduate School of Social Sciences', 2),
+(7, 'Graduate School of Social Sciences', 3);
+
+
+CREATE TABLE `Keyword` (
+  `keyword_id` int(7) NOT NULL,
+  `word` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Keyword` (`keyword_id`, `word`) VALUES
+(6, 'blockchain'),
+(2, 'CNN'),
+(10, 'cryptography'),
+(11, 'data mining'),
+(1, 'deep learning'),
+(4, 'Hadoop'),
+(3, 'image processing'),
+(13, 'medical imaging'),
+(8, 'music'),
+(14, 'neural networks'),
+(15, 'optimization'),
+(9, 'quantum'),
+(12, 'recommendation system'),
+(7, 'security'),
+(5, 'Spark');
+
+
+CREATE TABLE `Thesis` (
+  `thesis_id` int(7) NOT NULL,
+  `thesis_number` int(7) NOT NULL,
+  `title` varchar(500) NOT NULL,
+  `abstract` varchar(5000) NOT NULL,
+  `author_id` int(7) NOT NULL,
+  `year` int(7) NOT NULL,
+  `type` varchar(5000) NOT NULL,
+  `university_id` int(7) NOT NULL,
+  `institute_id` int(7) NOT NULL,
+  `page_count` int(7) DEFAULT NULL,
+  `language` varchar(50) NOT NULL,
+  `submission_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Thesis` (`thesis_id`, `thesis_number`, `title`, `abstract`, `author_id`, `year`, `type`, `university_id`, `institute_id`, `page_count`, `language`, `submission_date`) VALUES
+(1, 1000001, 'Image Classification with Deep Learning Methods', 'This thesis study addresses image classification problems using deep learning algorithms. Convolutional Neural Network (CNN) architectures are examined and performance comparisons are made on different datasets. Results show that deep learning methods provide higher accuracy rates compared to traditional machine learning methods.', 1, 2023, 'Master', 1, 1, 120, 'Turkish', '2023-06-15'),
+(2, 1000002, 'Distributed Database Systems for Big Data Analysis', 'This PhD thesis investigates the performance of distributed database systems for analyzing large datasets. Technologies such as Hadoop and Spark are examined, and optimization strategies are developed for different query types. The scalability and speed of the system are tested.', 2, 2024, 'PhD', 1, 1, 250, 'English', '2024-08-20'),
+(3, 1000003, 'AI-Enhanced Medical Imaging Systems', 'Artificial intelligence applications in medical imaging are examined. Deep learning models are developed for automatic analysis of radiology images and a system is proposed to assist doctors in the diagnosis process.', 3, 2023, 'Medical Specialization', 1, 3, 180, 'Turkish', '2023-09-10'),
+(4, 1000004, 'Blockchain Technology and Security Applications', 'The security evaluation of blockchain technology is conducted and application areas in different sectors are researched. Security vulnerabilities of smart contracts and decentralized applications are analyzed.', 4, 2024, 'Master', 2, 4, 95, 'English', '2024-07-05'),
+(5, 1000005, 'Use of Artificial Intelligence in Music Composition', 'This is a study on music composition using artificial intelligence algorithms at the intersection of art and technology. Music generation is performed with Recurrent Neural Network (RNN) and Transformer models.', 5, 2024, 'Art Proficiency', 1, 2, 200, 'Turkish', '2024-10-12'),
+(6, 1000006, 'Customer Behavior Analysis with Data Mining', 'This master thesis focuses on analyzing customer behaviors on e-commerce platforms using data mining techniques and developing personalized recommendation systems.', 6, 2023, 'Master', 1, 2, 110, 'Turkish', '2023-05-30'),
+(7, 1000007, 'Quantum Computing and Cryptography', 'Examination of the effects of quantum computers on cryptography and post-quantum cryptography methods. The security status of classical encryption methods such as RSA and ECC against quantum computers is evaluated.', 7, 2024, 'PhD', 3, 6, 280, 'English', '2024-09-25');
+
+
+CREATE TABLE `Thesis_Advisor` (
+  `thesis_advisor_id` int(7) NOT NULL,
+  `thesis_id` int(7) NOT NULL,
+  `advisor_id` int(7) NOT NULL,
+  `role` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Thesis_Advisor` (`thesis_advisor_id`, `thesis_id`, `advisor_id`, `role`) VALUES
+(1, 1, 1, 'Primary'),
+(2, 1, 2, 'Secondary'),
+(3, 2, 1, 'Primary'),
+(4, 3, 5, 'Primary'),
+(5, 3, 6, 'Secondary'),
+(6, 4, 3, 'Primary'),
+(7, 5, 1, 'Primary'),
+(8, 6, 2, 'Primary'),
+(9, 7, 4, 'Primary');
+
+
+
+CREATE TABLE `Thesis_Keyword` (
+  `thesis_keyword_id` int(7) NOT NULL,
+  `thesis_id` int(7) NOT NULL,
+  `keyword_id` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Thesis_Keyword` (`thesis_keyword_id`, `thesis_id`, `keyword_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 14),
+(5, 2, 4),
+(6, 2, 5),
+(7, 2, 15),
+(8, 3, 1),
+(9, 3, 13),
+(10, 4, 6),
+(11, 4, 7),
+(12, 5, 1),
+(13, 5, 8),
+(14, 6, 11),
+(15, 6, 12),
+(18, 7, 7),
+(16, 7, 9),
+(17, 7, 10);
+
+
+
+CREATE TABLE `Thesis_Topic` (
+  `thesis_topic_id` int(7) NOT NULL,
+  `thesis_id` int(7) NOT NULL,
+  `topic_id` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `Thesis_Topic` (`thesis_topic_id`, `thesis_id`, `topic_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 4),
+(4, 2, 1),
+(5, 2, 3),
+(6, 2, 6),
+(7, 3, 2),
+(8, 3, 8),
+(9, 3, 13),
+(10, 4, 1),
+(11, 4, 7),
+(12, 5, 2),
+(13, 5, 14),
+(14, 6, 1),
+(15, 6, 3),
+(16, 6, 9),
+(17, 7, 1),
+(18, 7, 7),
+(19, 7, 14);
+
+
+CREATE TABLE `Topic` (
+  `topic_id` int(7) NOT NULL,
+  `topic_name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+INSERT INTO `Topic` (`topic_id`, `topic_name`) VALUES
+(2, 'Artificial Intelligence'),
+(8, 'Bioinformatics'),
+(9, 'Business'),
+(1, 'Computer Science'),
+(3, 'Data Science'),
+(6, 'Database Systems'),
+(10, 'Economics'),
+(12, 'Education Sciences'),
+(14, 'Engineering'),
+(4, 'Machine Learning'),
+(15, 'Mathematics'),
+(13, 'Medicine'),
+(7, 'Network Security'),
+(11, 'Psychology'),
+(5, 'Software Engineering');
+
+
+CREATE TABLE `University` (
+  `university_id` int(7) NOT NULL,
+  `university_name` varchar(200) NOT NULL,
+  `foundation_year` int(7) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+INSERT INTO `University` (`university_id`, `university_name`, `foundation_year`) VALUES
+(1, 'Marmara University', 1883),
+(2, 'Istanbul University', 1453),
+(3, 'Bogazici University', 1863),
+(4, 'Middle East Technical University', 1956),
+(5, 'Hacettepe University', 1967),
+(6, 'Ankara University', 1946);
+
+
+-- Tablo için indeksler
+
+ALTER TABLE `Advisor`
+  ADD PRIMARY KEY (`advisor_id`),
+  ADD KEY `IX_Advisor_Last_Name` (`last_name`);
+
+
+ALTER TABLE `Author`
+  ADD PRIMARY KEY (`author_id`),
+  ADD KEY `IX_Author_Last_Name` (`last_name`);
+
+
+ALTER TABLE `Institute`
+  ADD PRIMARY KEY (`institute_id`),
+  ADD UNIQUE KEY `UQ_Institute_Name_University` (`institute_name`,`university_id`),
+  ADD KEY `IX_Institute_University` (`university_id`);
+
+
+ALTER TABLE `Keyword`
+  ADD PRIMARY KEY (`keyword_id`),
+  ADD UNIQUE KEY `UQ_Keyword` (`word`);
+
+
+ALTER TABLE `Thesis`
+  ADD PRIMARY KEY (`thesis_id`),
+  ADD UNIQUE KEY `UQ_Thesis_Number` (`thesis_number`),
+  ADD KEY `IX_Thesis_Author` (`author_id`),
+  ADD KEY `IX_Thesis_University` (`university_id`),
+  ADD KEY `IX_Thesis_Institute` (`institute_id`),
+  ADD KEY `IX_Thesis_Year` (`year`),
+  ADD KEY `IX_Thesis_Type` (`type`),
+  ADD KEY `IX_Thesis_Language` (`language`),
+  ADD KEY `IX_Thesis_Title` (`title`);
+
+
+ALTER TABLE `Thesis_Advisor`
+  ADD PRIMARY KEY (`thesis_advisor_id`),
+  ADD UNIQUE KEY `UQ_Thesis_Advisor_Role` (`thesis_id`,`advisor_id`,`role`),
+  ADD KEY `IX_Thesis_Advisor_Thesis` (`thesis_id`),
+  ADD KEY `IX_Thesis_Advisor_Advisor` (`advisor_id`);
+
+
+ALTER TABLE `Thesis_Keyword`
+  ADD PRIMARY KEY (`thesis_keyword_id`),
+  ADD UNIQUE KEY `UQ_Thesis_Keyword` (`thesis_id`,`keyword_id`),
+  ADD KEY `IX_Thesis_Keyword_Thesis` (`thesis_id`),
+  ADD KEY `IX_Thesis_Keyword_Keyword` (`keyword_id`);
+
+
+ALTER TABLE `Thesis_Topic`
+  ADD PRIMARY KEY (`thesis_topic_id`),
+  ADD UNIQUE KEY `UQ_Thesis_Topic` (`thesis_id`,`topic_id`),
+  ADD KEY `IX_Thesis_Topic_Thesis` (`thesis_id`),
+  ADD KEY `IX_Thesis_Topic_Topic` (`topic_id`);
+
+
+ALTER TABLE `Topic`
+  ADD PRIMARY KEY (`topic_id`),
+  ADD UNIQUE KEY `UQ_Topic_Name` (`topic_name`);
+
+
+ALTER TABLE `University`
+  ADD PRIMARY KEY (`university_id`),
+  ADD UNIQUE KEY `UQ_University_Name` (`university_name`);
+
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+
+
+ALTER TABLE `Advisor`
+  MODIFY `advisor_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `Author`
+  MODIFY `author_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `Institute`
+  MODIFY `institute_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `Keyword`
+  MODIFY `keyword_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+ALTER TABLE `Thesis`
+  MODIFY `thesis_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+ALTER TABLE `Thesis_Advisor`
+  MODIFY `thesis_advisor_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+ALTER TABLE `Thesis_Keyword`
+  MODIFY `thesis_keyword_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+ALTER TABLE `Thesis_Topic`
+  MODIFY `thesis_topic_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+ALTER TABLE `Topic`
+  MODIFY `topic_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+ALTER TABLE `University`
+  MODIFY `university_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+-- Tablo kısıtlamaları 
+
+ALTER TABLE `Institute`
+  ADD CONSTRAINT `FK_Institute_University` FOREIGN KEY (`university_id`) REFERENCES `University` (`university_id`) ON DELETE CASCADE;
+
+
+ALTER TABLE `Thesis`
+  ADD CONSTRAINT `FK_Thesis_Author` FOREIGN KEY (`author_id`) REFERENCES `Author` (`author_id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_Thesis_Institute` FOREIGN KEY (`institute_id`) REFERENCES `Institute` (`institute_id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_Thesis_University` FOREIGN KEY (`university_id`) REFERENCES `University` (`university_id`) ON DELETE NO ACTION;
+
+
+ALTER TABLE `Thesis_Advisor`
+  ADD CONSTRAINT `FK_Thesis_Advisor_Advisor` FOREIGN KEY (`advisor_id`) REFERENCES `Advisor` (`advisor_id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_Thesis_Advisor_Thesis` FOREIGN KEY (`thesis_id`) REFERENCES `Thesis` (`thesis_id`) ON DELETE CASCADE;
+
+
+ALTER TABLE `Thesis_Keyword`
+  ADD CONSTRAINT `FK_Thesis_Keyword_Keyword` FOREIGN KEY (`keyword_id`) REFERENCES `Keyword` (`keyword_id`) ON DELETE NO ACTION,
+  ADD CONSTRAINT `FK_Thesis_Keyword_Thesis` FOREIGN KEY (`thesis_id`) REFERENCES `Thesis` (`thesis_id`) ON DELETE CASCADE;
+
+
+ALTER TABLE `Thesis_Topic`
+  ADD CONSTRAINT `FK_Thesis_Topic_Thesis` FOREIGN KEY (`thesis_id`) REFERENCES `Thesis` (`thesis_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Thesis_Topic_Topic` FOREIGN KEY (`topic_id`) REFERENCES `Topic` (`topic_id`) ON DELETE NO ACTION;
+COMMIT;
